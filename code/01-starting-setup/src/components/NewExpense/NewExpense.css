@@ -1,0 +1,78 @@
+.new-expense {
+	background-color: var(--lavender-light);
+	border: 1px solid var(--lavender);
+	padding: var(--card-padding);
+	margin: 2rem 0;
+	text-align: center;
+}
+
+.new-expense__button-row {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2rem 0;
+}
+
+.new-expense__add-expense-button {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+	background-color: var(--lavender);
+	color: white;
+	font-size: 2.5rem;
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.new-expense__button-tooltip {
+	position: absolute;
+	top: 50%;
+	left: -10px;
+	transform: translate(-90%, -50%);
+	display: block;
+	padding: 0.5rem;
+	background: white;
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	text-align: left;
+	color: var(--text-color);
+	font-size: 0.75rem;
+	font-weight: normal;
+	white-space: nowrap;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.new-expense__button-tooltip::before {
+	position: absolute;
+	top: 50%;
+	right: -1px;
+	transform: translate(50%, -50%) rotate(45deg);
+	display: block;
+	width: 0.5rem;
+	height: 0.5rem;
+	background: white;
+	border-top: 1px solid var(--border-color);
+	border-right: 1px solid var(--border-color);
+	content: '';
+}
+
+@media (hover: hover) {
+	.new-expense__add-expense-button:hover {
+		background-color: var(--lavender-dark);
+	}
+
+	.new-expense__add-expense-button:hover .new-expense__button-tooltip {
+		transform: translate(-100%, -50%);
+		opacity: 1;
+	}
+}

@@ -1,0 +1,8 @@
+.expenses {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: var(--card-padding);
+	background-color: rgb(229 229 229);
+	margin: 2em 0;
+}
