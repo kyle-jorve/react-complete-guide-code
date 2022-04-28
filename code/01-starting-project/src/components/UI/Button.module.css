@@ -1,0 +1,19 @@
+.button {
+	display: inline-block;
+	padding: 0.5rem 1.5rem;
+	background-color: var(--lavender-dark);
+	border: 2px solid var(--lavender-dark);
+	color: white;
+	text-align: center;
+	font-size: 1rem;
+	font-weight: bold;
+	transition: color 0.3s ease, background-color 0.3s ease;
+	cursor: pointer;
+}
+
+@media (hover: hover) {
+	.button:hover {
+		color: var(--lavender-dark);
+		background-color: transparent;
+	}
+}
