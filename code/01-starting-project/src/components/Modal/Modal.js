@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import Button from '../UI/Button';
 import styles from './Modal.module.css';
 
-function Modal(props) {
-	function buttonClickHandler() {
-		props.onButtonClick();
-	}
-
+function ModalPort(props) {
 	return (
 		<div
 			className={`${styles.lightbox}${
@@ -24,11 +20,24 @@ function Modal(props) {
 					})}
 
 					<footer className={styles['lightbox__footer']}>
-						<Button text="Got It" onClick={buttonClickHandler} />
+						<Button text="Got It" onClick={props.onButtonClick} />
 					</footer>
 				</div>
 			</div>
 		</div>
+	);
+}
+
+function Modal(props) {
+	const modalPortal = document.querySelector('#modal-root');
+
+	return ReactDOM.createPortal(
+		<ModalPort
+			onButtonClick={props.onButtonClick}
+			active={props.active}
+			message={props.message}
+		/>,
+		modalPortal
 	);
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import Modal from './components/Modal/Modal';
 import Form from './components/Form/Form';
 import UserList from './components/UserList/UserList';
@@ -20,7 +20,7 @@ function App() {
 	}
 
 	return (
-		<main>
+		<Fragment>
 			<Modal
 				active={modalActive}
 				message={modalMessage}
@@ -33,7 +33,7 @@ function App() {
 				/>
 				<UserList users={usersList} />
 			</section>
-		</main>
+		</Fragment>
 	);
 }
 

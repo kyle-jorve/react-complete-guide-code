@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import styles from './Form.module.css';
 
 function Form(props) {
-	const fieldsObj = {
-		username: '',
-		age: '',
-	};
-	const [userInput, setUserInput] = useState(fieldsObj);
+	const usernameInputRef = useRef();
+	const ageInputRef = useRef();
 
 	function addUserHandler(event) {
+		const userInput = {
+			username: usernameInputRef.current.value,
+			age: ageInputRef.current.value,
+		};
 		const userValid = userInput.username.trim().length > 0;
 		const ageFilled = userInput.age.length;
 		const ageValid = ageFilled && userInput.age > 0;
@@ -39,29 +40,8 @@ function Form(props) {
 
 		props.onAddUser(userInput);
 
-		clearUserInput();
-	}
-
-	function usernameChangeHandler(event) {
-		setUserInput(prevState => {
-			return {
-				...prevState,
-				username: event.target.value,
-			};
-		});
-	}
-
-	function ageChangeHandler(event) {
-		setUserInput(prevState => {
-			return {
-				...prevState,
-				age: event.target.value,
-			};
-		});
-	}
-
-	function clearUserInput() {
-		setUserInput(fieldsObj);
+		usernameInputRef.current.value = '';
+		ageInputRef.current.value = '';
 	}
 
 	return (
@@ -75,8 +55,7 @@ function Form(props) {
 						type="text"
 						id="username"
 						className={styles['form__input']}
-						onChange={usernameChangeHandler}
-						value={userInput.username}
+						ref={usernameInputRef}
 					/>
 				</div>
 
@@ -89,8 +68,7 @@ function Form(props) {
 						min="0"
 						id="age"
 						className={styles['form__input']}
-						onChange={ageChangeHandler}
-						value={userInput.age}
+						ref={ageInputRef}
 					/>
 				</div>
 
