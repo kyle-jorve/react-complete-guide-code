@@ -1,84 +1,157 @@
-import React, { useState } from 'react';
+import React, { useReducer, useContext, useRef } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import FormField from '../UI/FormField/FormField';
+import AuthContext from '../../context/auth-context';
 
-const Login = (props) => {
-  const [enteredEmail, setEnteredEmail] = useState('');
-  const [emailIsValid, setEmailIsValid] = useState();
-  const [enteredPassword, setEnteredPassword] = useState('');
-  const [passwordIsValid, setPasswordIsValid] = useState();
-  const [formIsValid, setFormIsValid] = useState(false);
+const initInputState = {
+	value: '',
+	valid: null,
+};
 
-  const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
+function emailReducer(state, action) {
+	if (action.type === 'USER_INPUT') {
+		return {
+			value: action.value,
+			valid: action.value.includes('@'),
+		};
+	}
 
-    setFormIsValid(
-      event.target.value.includes('@') && enteredPassword.trim().length > 6
-    );
-  };
+	if (action.type === 'INPUT_BLUR') {
+		return {
+			value: state.value,
+			valid: state.value.includes('@'),
+		};
+	}
 
-  const passwordChangeHandler = (event) => {
-    setEnteredPassword(event.target.value);
+	return initInputState;
+}
 
-    setFormIsValid(
-      event.target.value.trim().length > 6 && enteredEmail.includes('@')
-    );
-  };
+function passwordReducer(state, action) {
+	if (action.type === 'USER_INPUT') {
+		return {
+			value: action.value,
+			valid: action.value.length >= 7,
+		};
+	}
 
-  const validateEmailHandler = () => {
-    setEmailIsValid(enteredEmail.includes('@'));
-  };
+	if (action.type === 'INPUT_BLUR') {
+		return {
+			value: state.value,
+			valid: state.value.length >= 7,
+		};
+	}
 
-  const validatePasswordHandler = () => {
-    setPasswordIsValid(enteredPassword.trim().length > 6);
-  };
+	return initInputState;
+}
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    props.onLogin(enteredEmail, enteredPassword);
-  };
+const Login = () => {
+	const emailRef = useRef();
+	const passwordRef = useRef();
+	const [emailState, dispatchEmail] = useReducer(
+		emailReducer,
+		initInputState
+	);
+	const [passwordState, dispatchPassword] = useReducer(
+		passwordReducer,
+		initInputState
+	);
+	const authContext = useContext(AuthContext);
+	const formFields = [
+		{
+			ref: emailRef,
+			valid: emailState.valid,
+			label: 'E-Mail',
+			type: 'email',
+			id: 'email',
+			value: emailState.value,
+			onChange: emailChangeHandler,
+			onBlur: validateEmailHandler,
+		},
+		{
+			ref: passwordRef,
+			valid: passwordState.valid,
+			label: 'Password',
+			type: 'password',
+			id: 'password',
+			value: passwordState.value,
+			onChange: passwordChangeHandler,
+			onBlur: validatePasswordHandler,
+		},
+	];
 
-  return (
-    <Card className={classes.login}>
-      <form onSubmit={submitHandler}>
-        <div
-          className={`${classes.control} ${
-            emailIsValid === false ? classes.invalid : ''
-          }`}
-        >
-          <label htmlFor="email">E-Mail</label>
-          <input
-            type="email"
-            id="email"
-            value={enteredEmail}
-            onChange={emailChangeHandler}
-            onBlur={validateEmailHandler}
-          />
-        </div>
-        <div
-          className={`${classes.control} ${
-            passwordIsValid === false ? classes.invalid : ''
-          }`}
-        >
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={enteredPassword}
-            onChange={passwordChangeHandler}
-            onBlur={validatePasswordHandler}
-          />
-        </div>
-        <div className={classes.actions}>
-          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
-            Login
-          </Button>
-        </div>
-      </form>
-    </Card>
-  );
+	function emailChangeHandler(event) {
+		dispatchEmail({
+			type: 'USER_INPUT',
+			value: event.target.value,
+		});
+	};
+
+	function passwordChangeHandler(event) {
+		dispatchPassword({
+			type: 'USER_INPUT',
+			value: event.target.value,
+		});
+	};
+
+	function validateEmailHandler() {
+		dispatchEmail({
+			type: 'INPUT_BLUR',
+		});
+	};
+
+	function validatePasswordHandler() {
+		dispatchPassword({
+			type: 'INPUT_BLUR',
+		});
+	};
+
+	function submitHandler(event) {
+		event.preventDefault();
+
+		if (emailState.valid && passwordState.valid) {
+			authContext.onLogin(emailState.value, passwordState.value);
+		}
+		else if (!emailState.valid) {
+			emailRef.current.focus();
+		}
+		else if (!passwordState.valid) {
+			passwordRef.current.focus();
+		}
+	};
+
+	return (
+		<Card className={classes.login}>
+			<form onSubmit={submitHandler}>
+				{formFields.map(f => {
+					return (
+						<FormField
+							ref={f.ref}
+							key={f.id}
+							valid={f.valid}
+							label={f.label}
+							type={f.type}
+							id={f.id}
+							value={f.value}
+							onChange={f.onChange}
+							onBlur={f.onBlur}
+						/>
+					);
+				})}
+
+				<div className={classes.actions}>
+					<Button
+						type="submit"
+						className={classes.btn}
+					>
+						Login
+					</Button>
+				</div>
+			</form>
+		</Card>
+	);
 };
 
 export default Login;
