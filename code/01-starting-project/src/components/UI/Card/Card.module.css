@@ -1,0 +1,12 @@
+.card {
+    padding: 1rem;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.15);
+}
+
+@media (min-width: 64em) {
+    .card {
+        padding: 2rem;
+    }
+}

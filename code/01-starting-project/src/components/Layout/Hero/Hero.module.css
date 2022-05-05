@@ -1,0 +1,41 @@
+.hero {
+    --content-overflow: 80px;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    aspect-ratio: 3 / 2;
+    margin-bottom: calc(var(--content-overflow) + 1rem);
+    padding-bottom: 0;
+    background-repeat: none;
+    background-position: center center;
+    background-size: cover;
+}
+
+.hero__content {
+    transform: translateY(var(--content-overflow));
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(255,255,255,.6);
+    backdrop-filter: blur(16px);
+}
+
+.hero__title {
+    margin-top: 0;
+}
+
+.hero__desc {
+    font-weight: lighter;
+    font-size: 0.8rem;
+}
+
+@media(min-width: 40em) {
+    .hero {
+        aspect-ratio: 6 / 2;
+    }
+
+    .hero__desc {
+        font-size: 1rem;
+    }
+}

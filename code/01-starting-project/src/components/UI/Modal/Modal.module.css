@@ -1,0 +1,160 @@
+.lightbox {
+    --padding: 1rem;
+
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding);
+    background: rgba(0, 0, 0, .8);
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+}
+
+.lightbox__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+}
+
+.lightbox__box {
+    position: relative;
+    z-index: 2;
+    transform: translateY(40px);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    transition: transform .3s ease;
+}
+
+.lightbox__title-row,
+.lightbox__inner {
+    padding: 1rem;
+}
+
+.lightbox__title-row {
+    display: grid;
+    grid-template:
+        'title cost' auto
+        'buttons buttons' auto / auto auto;
+    align-items: baseline;
+    gap: 1rem;
+    order: 1;
+}
+
+.lightbox__title {
+    grid-area: title;
+    margin: 0;
+}
+
+.lightbox__total-cost {
+    grid-area: cost;
+    justify-self: end;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--rust);
+}
+
+.lightbox__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    grid-area: buttons;
+    gap: 1rem;
+}
+
+.lightbox__inner {
+    max-height: calc(60vh - (var(--padding) * 2));
+    overflow-y: auto;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.lightbox__list {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lightbox__item {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.lightbox__item:last-child {
+    border-bottom: none;
+}
+
+.lightbox__item-title {
+    margin: 0 0 .65em 0;
+    font-size: 1.25rem;
+}
+
+.lightbox__item-price-amount-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.lightbox__item-price {
+    font-weight: bold;
+    font-size: 1.125rem;
+    color: var(--rust);
+}
+
+.lightbox__item-amount {
+    display: block;
+    padding: .5rem;
+    border: 1px solid var(--gray-light);
+    border-radius: 4px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.lightbox__item-buttons {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.lightbox__item-button {
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 4px;
+    font-size: 1.25rem;
+}
+
+.lightbox--active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox--active .lightbox__box {
+    transform: none;
+}
+
+@media (min-width: 64em) {
+    .lightbox {
+        --padding: 2rem;
+    }
+
+    .lightbox__title-row,
+    .lightbox__inner {
+        padding: 1rem 2rem;
+    }
+}
