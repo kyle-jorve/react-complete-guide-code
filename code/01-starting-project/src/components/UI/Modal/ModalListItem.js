@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import Button from '../Button/Button';
 import CartContext from '../../../context/cart-context';
 
 import styles from './Modal.module.css';
@@ -27,9 +26,9 @@ function ModalListItem(props) {
             </div>
 
             <div className={styles['lightbox__item-buttons']}>
-                <Button
-                    type={'button'}
-                    className={`${styles['lightbox__item-button']} ${buttonStyles['button--border']}`}
+                <button
+                    type='button'
+                    className={`${buttonStyles.button} ${styles['lightbox__item-button']} ${buttonStyles['button--border']}`}
                     onClick={() => context.selectMeal({
                         id: props.id,
                         amount: -1,
@@ -37,11 +36,10 @@ function ModalListItem(props) {
                     })}
                 >
                     -
-                </Button>
-
-                <Button
-                    type={'button'}
-                    className={`${styles['lightbox__item-button']} ${buttonStyles['button--border']}`}
+                </button>
+                <button
+                    type='button'
+                    className={`${buttonStyles.button} ${styles['lightbox__item-button']} ${buttonStyles['button--border']}`}
                     onClick={() => context.selectMeal({
                         id: props.id,
                         amount: 1,
@@ -49,7 +47,7 @@ function ModalListItem(props) {
                     })}
                 >
                     +
-                </Button>
+                </button>
             </div>
         </li>
     )

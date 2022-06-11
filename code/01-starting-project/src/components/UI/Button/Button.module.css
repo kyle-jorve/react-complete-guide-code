@@ -21,6 +21,14 @@
     color: var(--rust);
 }
 
+.button:disabled {
+    background-color: lightgray;
+    border-color: gray;
+    color: gray;
+    pointer-events: none;
+    cursor: auto;
+}
+
 @media (hover: hover) {
     .button:hover {
         background-color: var(--red);

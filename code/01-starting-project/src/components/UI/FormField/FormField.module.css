@@ -1,3 +1,46 @@
-.form-control {
-    
+.form-control + .form-control {
+    margin-top: 1rem;
+}
+
+.form-control--invalid input {
+    background-color: #fddddd;
+    border-color: rgb(196, 70, 70)
+}
+
+.form__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.form__row .form-control {
+    flex: 1 1 100%;
+}
+
+.form__row .form-control + .form-control {
+    margin: 0;
+}
+
+.input--large {
+    display: block;
+    width: 100%;
+    padding: .5rem;
+    margin-top: .25rem;
+    border-radius: 4px;
+    border: 2px solid darkgray;
+}
+
+.form__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.error-text {
+    color: rgb(196, 70, 70);
+    font-size: 0.8rem;
+    margin: .25rem 0 0 0;
 }

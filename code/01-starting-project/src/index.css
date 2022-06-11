@@ -55,6 +55,24 @@ button {
 	cursor: pointer;
 }
 
+.loading-text {
+	font-weight: bold;
+	text-align: center;
+}
+
+.error-text {
+	font-weight: bold;
+	color: rgb(189, 78, 78);
+	text-align: center;
+}
+
+hr {
+	height: 1px;
+	margin: 2rem 0;
+	border: none;
+	background: gray;
+}
+
 @media (min-width: 64em) {
 	section {
 		padding: 2rem;

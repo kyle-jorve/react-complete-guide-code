@@ -4,20 +4,29 @@ const CartContext = React.createContext({
     selectedMeals: [],
     totalMeals: 0,
     totalCost: 0,
-    cartActive: false,
+    modalActive: false,
     cartButtonActive: false,
     selectMeal: () => {},
-    openCart: () => {},
-    closeCart: () => {}
+    openModal: () => {},
+    closeModal: () => {}
 });
 let buttonTimer;
 
 export function CartContextProvider(props) {
     const [selectedMeals, setSelectedMeals] = useState([]);
     const [cartActive, setCartActive] = useState(false);
-    const [totalMeals, setTotalMeals] = useState(0);
+    const [checkoutActive, setCheckoutActive] = useState(false);
     const [totalCost, setTotalCost] = useState('0.00');
     const [cartButtonActive, setCartButtonActive] = useState(false);
+    const [error, setError] = useState(false);
+    const [meals, setMeals] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const modalActive = cartActive || checkoutActive;
+    const totalMeals = selectedMeals.reduce((prev, cur) => {
+        const val = prev + cur.amount;
+
+        return val;
+    }, 0);
 
     function selectMealHandler(meal) {
         /*
@@ -57,18 +66,28 @@ export function CartContextProvider(props) {
 
             return returnArr;
         });
-        
-        setTotalMeals(prevState => prevState += meal.amount);
 
         setTotalCost(prevState => Math.abs((parseFloat(prevState) + (meal.price * meal.amount))).toFixed(2));
     }
 
-    function openCartHandler() {
+    function openModalHandler() {
         setCartActive(true);
+        setCheckoutActive(false);
     }
     
-    function closeCartHandler() {
+    function closeModalHandler() {
         setCartActive(false);
+        setCheckoutActive(false);
+    }
+
+    function openCheckoutHandler() {
+        setCartActive(false);
+        setCheckoutActive(true);
+    }
+    
+    function closeCheckoutHandler() {
+        setCartActive(true);
+        setCheckoutActive(false);
     }
 
     return (
@@ -77,10 +96,21 @@ export function CartContextProvider(props) {
             totalMeals,
             totalCost,
             cartActive,
+            checkoutActive,
+            modalActive,
             cartButtonActive,
+            error,
+            meals,
+            loading,
             selectMeal: selectMealHandler,
-            openCart: openCartHandler,
-            closeCart: closeCartHandler
+            setSelectedMeals,
+            openModal: openModalHandler,
+            closeModal: closeModalHandler,
+            openCheckout: openCheckoutHandler,
+            closeCheckout: closeCheckoutHandler,
+            setError,
+            setMeals,
+            setLoading
         }}>
             {props.children}
         </CartContext.Provider>

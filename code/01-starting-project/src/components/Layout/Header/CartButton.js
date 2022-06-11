@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import Button from '../../UI/Button/Button';
 import CartContext from '../../../context/cart-context';
 
 import styles from './CartButton.module.css';
+import buttonStyles from '../../UI/Button/Button.module.css';
 
 let buttonTimer;
 
@@ -25,9 +25,9 @@ function CartButton() {
     }, [context.selectedMeals]);
 
     return (
-        <Button
-            className={`${styles['cart-button']}${cartButtonActive ? ` ${styles['cart-button--active']}` : ''}`}
-            onClick={context.openCart}
+        <button
+            className={`${buttonStyles.button} ${styles['cart-button']}${cartButtonActive ? ` ${styles['cart-button--active']}` : ''}`}
+            onClick={context.openModal}
         >
             <svg
                 className={styles['cart-button__icon']}
@@ -43,7 +43,7 @@ function CartButton() {
             </span>
 
             {context.totalMeals}
-        </Button>
+        </button>
     )
 }
 

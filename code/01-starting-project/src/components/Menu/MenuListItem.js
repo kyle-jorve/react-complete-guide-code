@@ -1,10 +1,9 @@
 import React, { useContext, useRef, useState } from 'react';
-import FormField from '../UI/FormField/FormField';
-import Button from '../UI/Button/Button';
 import CartContext from '../../context/cart-context';
 import Tooltip from '../UI/Tooltip/Tooltip';
 
 import styles from './Menu.module.css';
+import buttonStyles from '../UI/Button/Button.module.css';
 
 function MenuListItem(props) {
     const inputRef = useRef();
@@ -58,27 +57,26 @@ function MenuListItem(props) {
                     Invalid value. Please enter a value between 1 and 5.
                 </Tooltip>
 
-                <FormField
-                    ref={inputRef}
-                    className={styles['menu__item-form-control']}
-                    label={'Amount'}
-                    input={{
-                        id: `amount-${props.id}`,
-                        type: 'number',
-                        defaultValue: 1,
-                        min: 1,
-                        max: 5,
-                        step: 1,
-                        onChange: validateForm
-                    }}
-                />
-
-                <Button
-                    className={styles['menu__item-button']}
+                <div className={`${styles['form-control']}${props.className ? ` ${props.className}` : ''}`}>
+                    <label htmlFor={props.id}>{props.label}</label>
+                    <input
+                        ref={inputRef}
+                        id={`amount-${props.id}`}
+                        type='number'
+                        defaultValue='1'
+                        min='1'
+                        max='5'
+                        step='1'
+                        onChange={validateForm}
+                    />
+                </div>
+                
+                <button
+                    className={`${buttonStyles.button} ${styles['menu__item-button']}`}
                     type={'submit'}
                 >
                     + Add
-                </Button>
+                </button>
             </form>
         </li>
     )
