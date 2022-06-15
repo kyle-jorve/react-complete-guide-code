@@ -7,10 +7,10 @@ function Header() {
             <nav>
                 <ul>
                     <li>
-                        <NavLink activeClassName={styles.active} to="/welcome">Welcome</NavLink>
+                        <NavLink className={(navData) => navData.isActive ? styles.active : ''} to="/welcome">Welcome</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName={styles.active} to="/products">Products</NavLink>
+                        <NavLink className={(navData) => navData.isActive ? styles.active : ''} to="/products">Products</NavLink>
                     </li>
                 </ul>
             </nav>

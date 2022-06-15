@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
@@ -10,23 +10,14 @@ function App() {
     <React.Fragment>
       <Header />
       <main>
-        <Switch>
-          <Route path="/" exact>
-            <Redirect to="/welcome" />
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/welcome" />} />
+          <Route path="/welcome/*" element={<Welcome />}>
+            <Route path="new-user" element={<h2>You must be new here</h2>} />
           </Route>
-
-          <Route path="/welcome">
-            <Welcome />
-          </Route>
-          
-          <Route path="/products" exact>
-            <Products />
-          </Route>
-          
-          <Route path="/products/:productID">
-            <ProductDetail />
-          </Route>
-        </Switch>
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:productID" element={<ProductDetail />} />
+        </Routes>
       </main>
     </React.Fragment>
   );

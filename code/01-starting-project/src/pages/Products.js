@@ -1,7 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import image from '../assets/obi-wan.webp';
 
 function Products() {
+    const navigate = useNavigate();
+
     return (
         <React.Fragment>
             <h1>This is the products page</h1>
@@ -19,7 +22,7 @@ function Products() {
                 </li>
             </ul>
 
-            <img src="https://origin.go.gq.com.au/wp-content/uploads/2019/08/main-46.jpg" alt=""/>
+            <img src={image} alt=""/>
         </React.Fragment>
     )
 }

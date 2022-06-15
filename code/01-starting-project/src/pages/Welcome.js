@@ -1,16 +1,17 @@
 import React from "react";
-import { Route } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+import image from '../assets/john-oliver.gif';
 
 function Welcome() {
     return (
         <React.Fragment>
             <h1>Welcome Welcome Welcome!</h1>
 
-            <Route path="/welcome/new-user">
-                <h2>You must be new here</h2>
-            </Route>
+            <Outlet />
 
-            <img src="https://c.tenor.com/RMONbnr9hgwAAAAC/john-oliver.gif" alt=""/>
+            <Link to="new-user">New Loser</Link>
+
+            <img src={image} alt=""/>
         </React.Fragment>
     )
 }
