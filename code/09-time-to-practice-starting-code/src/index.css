@@ -3,15 +3,16 @@
 }
 
 body {
-  font-family: sans-serif;
   margin: 0;
   background-color: #e7f8f8;
+  font-family: sans-serif;
 }
 
 .centered {
   margin: 3rem auto;
   text-align: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -53,4 +54,15 @@ body {
 .btn--flat:active {
   background-color: teal;
   color: white;
+}
+
+.title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.title-row :where(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
 }
