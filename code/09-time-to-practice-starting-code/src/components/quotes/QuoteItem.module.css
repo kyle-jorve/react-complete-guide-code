@@ -1,4 +1,6 @@
 .item {
+  --bg: rgba(194, 231, 240, 1);
+
   margin: 1rem 0;
   padding: 1rem;
   display: flex;
@@ -6,7 +8,7 @@
   align-items: flex-end;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-  background-color: #c2e7f0;
+  background-color: var(--bg);
 }
 
 .item:last-of-type {
@@ -20,10 +22,32 @@
 }
 
 .item blockquote {
+  position: relative;
   margin: 0;
   text-align: left;
   font-size: 1.5rem;
   color: #212929;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.item blockquote::before,
+.item blockquote::after {
+  position: absolute;
+  inset: 0 0 0 auto;
+  display: block;
+}
+
+.item blockquote::before {
+  width: 50px;
+  background: linear-gradient(to left, var(--bg), var(--bg), rgba(194, 231, 240, 0));
+  content: '';
+}
+
+.item blockquote::after {
+  z-index: 2;
+  opacity: .5;
+  content: '...';
 }
 
 .item p {

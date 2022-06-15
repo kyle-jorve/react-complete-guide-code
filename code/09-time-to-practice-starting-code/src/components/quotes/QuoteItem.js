@@ -6,7 +6,7 @@ const QuoteItem = (props) => {
     <li className={classes.item}>
       <figure>
         <blockquote>
-          <p>{props.text.substring(0, 34)}...</p>
+          <p>{props.text.substring(0, 60)}</p>
         </blockquote>
         <figcaption>{props.author}</figcaption>
       </figure>

@@ -1,0 +1,2 @@
+(this["webpackJsonpreact-complete-guide"]=this["webpackJsonpreact-complete-guide"]||[]).push([[5],{54:function(e,t,c){"use strict";c.r(t);var n=c(0);t.default=function(){return Object(n.jsxs)("div",{className:"centered",children:[Object(n.jsx)("h1",{children:"Page Not Found \ud83d\ude41"}),Object(n.jsx)("p",{children:"What are you even doing?"})]})}}}]);
+//# sourceMappingURL=5.89a9aa84.chunk.js.map
