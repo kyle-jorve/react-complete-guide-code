@@ -5,6 +5,7 @@
 }
 
 body {
+  margin: 0;
   font-family: 'Open Sans', 'Lato', sans-serif;
 }
 
@@ -15,4 +16,9 @@ h4,
 h5,
 h6 {
   font-family: 'Lato', sans-serif;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
