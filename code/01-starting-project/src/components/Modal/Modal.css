@@ -10,4 +10,62 @@
     top: 30%;
     left: 25%;
     width: 50%;
+    /* transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity .3s ease,
+        transform .3s ease; */
+}
+
+.Modal--css-transitions {
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+}
+
+.Modal--fade-enter,
+.Modal--fade-enter-active,
+.Modal--fade-enter-done {
+    transform: none;
+    opacity: 1;
+    pointer-events: all;
+}
+
+.Modal--animate-enter-active,
+.Modal--open {
+    /* opacity: 1;
+    transform: none; */
+    /* pointer-events: all; */
+    animation: openModal 0.4s ease forwards;
+}
+
+.Modal--animate-exit-active,
+.Modal--closed {
+    animation: closeModal 1s ease forwards;
+}
+
+@keyframes openModal {
+    from {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes closeModal {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
 }
